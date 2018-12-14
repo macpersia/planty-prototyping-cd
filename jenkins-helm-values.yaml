@@ -21,7 +21,9 @@ Agent:
       cpu: "1"
       memory: "512Mi"
 Persistence:
-  Size: 100Gi
+  # Changed by Hadi
+  #Size: 100Gi
+  Size: 30Gi
 NetworkPolicy:
   ApiVersion: networking.k8s.io/v1
 rbac:
