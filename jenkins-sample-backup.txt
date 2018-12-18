@@ -1,0 +1,4 @@
+
+kubectl cp cd-jenkins-848d877849-jfqdb:var/lib/jenkins/backups/FULL-2018-12-17_23-54.sanitized ./jenkins/backups/FULL-2018-12-17_23-54.sanitized
+
+
