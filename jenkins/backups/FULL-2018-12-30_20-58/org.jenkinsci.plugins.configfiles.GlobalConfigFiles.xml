@@ -85,7 +85,7 @@
       <comment>user config</comment>
       <content>registry=http://repo-nexus-service:8081/repository/npm-virtual/
 _auth=&quot;YWRtaW46YWRtaW4xMjM=&quot;
-//repo-nexus-service:8081/repository/npm-local/:_authToken=NpmToken.53e6369b-2110-3062-a2c4-751cf4d296ab</content>
+//repo-nexus-service:8081/repository/npm-local/:_authToken=NpmToken.aa4a1922-696a-338e-ba5f-cb74dbc2145a</content>
       <providerId>jenkins.plugins.nodejs.configfiles.NPMConfig</providerId>
       <registries/>
     </jenkins.plugins.nodejs.configfiles.NPMConfig>

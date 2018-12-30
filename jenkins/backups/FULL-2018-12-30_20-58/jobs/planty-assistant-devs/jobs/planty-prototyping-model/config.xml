@@ -3,7 +3,7 @@
   <actions/>
   <properties>
     <jenkins.branch.ProjectNameProperty plugin="branch-api@2.1.2">
-      <name>planty-assistant-agent</name>
+      <name>planty-prototyping-model</name>
     </jenkins.branch.ProjectNameProperty>
   </properties>
   <folderViews class="jenkins.branch.MultiBranchProjectViewHolder" plugin="branch-api@2.1.2">
@@ -33,10 +33,10 @@
     <data>
       <jenkins.branch.BranchSource>
         <source class="com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource" plugin="cloudbees-bitbucket-branch-source@2.3.0">
-          <id>com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMNavigator::https://bitbucket.org::planty-assistant-devs::planty-assistant-agent</id>
+          <id>com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMNavigator::https://bitbucket.org::planty-assistant-devs::planty-prototyping-model</id>
           <serverUrl>https://bitbucket.org</serverUrl>
           <repoOwner>planty-assistant-devs</repoOwner>
-          <repository>planty-assistant-agent</repository>
+          <repository>planty-prototyping-model</repository>
           <traits>
             <com.cloudbees.jenkins.plugins.bitbucket.BranchDiscoveryTrait>
               <strategyId>1</strategyId>
@@ -50,6 +50,16 @@
             </com.cloudbees.jenkins.plugins.bitbucket.ForkPullRequestDiscoveryTrait>
           </traits>
         </source>
+        <buildStrategies>
+          <jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl plugin="basic-branch-build-strategies@1.1.1">
+            <filters>
+              <jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl_-RegexNameFilter>
+                <regex>.*</regex>
+                <caseSensitive>true</caseSensitive>
+              </jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl_-RegexNameFilter>
+            </filters>
+          </jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl>
+        </buildStrategies>
       </jenkins.branch.BranchSource>
     </data>
     <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>

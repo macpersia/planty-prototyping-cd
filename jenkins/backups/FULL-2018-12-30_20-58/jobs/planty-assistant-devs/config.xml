@@ -3,9 +3,6 @@
   <actions/>
   <description></description>
   <properties>
-    <org.csanchez.jenkins.plugins.kubernetes.KubernetesFolderProperty plugin="kubernetes@1.14.1">
-      <permittedClouds/>
-    </org.csanchez.jenkins.plugins.kubernetes.KubernetesFolderProperty>
     <org.jenkinsci.plugins.pipeline.maven.MavenConfigFolderOverrideProperty plugin="pipeline-maven@3.6.5">
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
@@ -34,8 +31,8 @@
   </orphanedItemStrategy>
   <triggers>
     <com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger plugin="cloudbees-folder@6.7">
-      <spec>H H/4 * * *</spec>
-      <interval>86400000</interval>
+      <spec>* * * * *</spec>
+      <interval>300000</interval>
     </com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger>
   </triggers>
   <disabled>false</disabled>
