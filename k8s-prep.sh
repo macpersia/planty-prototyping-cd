@@ -1,13 +1,21 @@
-
+sudo snap install microk8s --classic
+sudo snap alias microk8s.kubectl kubectl
+microk8s.enable dns 
 #kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin
 kubectl create serviceaccount tiller --namespace kube-system
 kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
+microk8s.enable storage
+sudo snap install helm --classic
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --service-account=tiller 
 #helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --tiller-tls-verify
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config update
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config version
+
+# Make the internet accessible to pods 
+sudo iptables -A FORWARD -i enp0s3 -j ACCEPT
+sudo iptables -A FORWARD -i cbr0 -j ACCEPT
 
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n cd stable/jenkins --version 0.25.1 -f jenkins-helm-values.yaml --wait
 export POD_NAME=$(kubectl get pods -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
