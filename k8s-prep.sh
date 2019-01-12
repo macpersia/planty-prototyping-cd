@@ -17,18 +17,26 @@ helm --kubeconfig /snap/microk8s/current/configs/kubelet.config version
 sudo iptables -A FORWARD -i enp0s3 -j ACCEPT
 sudo iptables -A FORWARD -i cbr0 -j ACCEPT
 
+# Prepare Nexus
+# There's an unresolved issue with this charm
+#helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n repo stable/sonatype-nexus --version 1.15.0 --wait
+#kubectl run repo-nexus --image=sonatype/nexus3
+kubectl create -f nexus-deployment.yaml 
+kubectl create -f nexus-service.yaml
+
+# MANUAL! Restore Nexus Blobs and DBs backups
+
+# MANUAL! Add Nexus pod's IP as "repo-nexus-service" to /etc/hosts 
+
+# MANUAL! For local development, configure both Maven and NPM to point to the Nexus on k8s
+
+# Prepare Jenkins
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n cd stable/jenkins --version 0.25.1 -f jenkins-helm-values.yaml --wait
 export POD_NAME=$(kubectl get pods -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward $POD_NAME 28080:8080 >> /dev/null &
 
 printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 
+# ATTENTION! Remember to install ThinBackup plugin & restore Jenkins backups
 
-# There's an unresolved issue with this charm
-#helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n repo stable/sonatype-nexus --version 1.15.0 --wait
-
-#kubectl run repo-nexus --image=sonatype/nexus3
-
-kubectl create -f nexus-deployment.yaml 
-kubectl create -f nexus-service.yaml
 
