@@ -40,7 +40,11 @@ kubectl port-forward $POD_NAME 28080:8080 >> /dev/null &
 
 printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 
-# ATTENTION! Remember to install ThinBackup plugin & restore Jenkins backups
+# MANUAL! Install ThinBackup plugin & restore Jenkins backups
 
-# Add credentials for Nexus user "deployer"
+# MANUAL! Add credentials for Nexus user "deployer"
+
+# To enable webhooks to localhost
+sudo npm install bespoken-tools -g
+
 
