@@ -26,12 +26,12 @@ kubectl create -f nexus-service.yaml
 
 # MANUAL! Restore Nexus Blobs and DBs backups
 
+# MANUAL! Add a Nexus role named "deployer-role" with these privileges: nx-component-upload & nx-repository-view-*-*-edit, and having nx-anonymous role too.
+# MANUAL! Add a Nexus user with "deployer" as ID, and these roles: deployer-role & nx-anonymous.
+
 # MANUAL! Add Nexus pod's IP as "repo-nexus-service" to /etc/hosts 
 
 # MANUAL! For local development, configure both Maven and NPM to point to the Nexus on k8s
-
-# MANUAL! Add a Nexus role named "deployer-role" with these privileges: nx-component-upload & nx-repository-view-*-*-edit, and having nx-anonymous role too.
-# MANUAL! Add a Nexus user with "deployer" as ID, and these roles: deployer-role & nx-anonymous.
 
 # Prepare Jenkins
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n cd stable/jenkins --version 0.25.1 -f jenkins-helm-values.yaml --wait
@@ -42,4 +42,5 @@ printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-passwor
 
 # ATTENTION! Remember to install ThinBackup plugin & restore Jenkins backups
 
+# Add credentials for Nexus user "deployer"
 
