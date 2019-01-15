@@ -26,6 +26,9 @@ kubectl create -f nexus-service.yaml
 
 # MANUAL! Restore Nexus Blobs and DBs backups
 
+# Something like: kubectl cp ./nexus-data repo-nexus-6cd55959b5-tqffw:./
+# Then inside the pod: rm -rf accesslog analytics audit component config security; kill 1
+
 # MANUAL! Add a Nexus role named "deployer-role" with these privileges: nx-component-upload & nx-repository-view-*-*-edit, and having nx-anonymous role too.
 # MANUAL! Add a Nexus user with "deployer" as ID, and these roles: deployer-role & nx-anonymous.
 
