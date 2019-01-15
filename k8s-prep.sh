@@ -44,7 +44,8 @@ printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-passwor
 
 # MANUAL! Add credentials for Nexus user "deployer"
 
-# To enable webhooks to localhost
-sudo npm install bespoken-tools -g
+## To enable webhooks to localhost
+#sudo npm install bespoken-tools -g
+
 
 
