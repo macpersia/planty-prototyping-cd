@@ -14,10 +14,14 @@ spec:
           image: sonatype/nexus3:latest
           resources:
             limits:
-              memory: "4Gi"
+              # Change by Hadi, to workaround low memory
+              #memory: "4Gi"
+              memory: "1Gi"
               cpu: "1000m"
             requests:
-              memory: "2Gi"
+              # Change by Hadi, to workaround low memory
+              #memory: "2Gi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
             - containerPort: 8081
