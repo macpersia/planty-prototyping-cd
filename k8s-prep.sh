@@ -15,7 +15,9 @@ microk8s.enable storage
 #wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
 sudo snap install helm --classic
 
+#./helm init --service-account=tiller
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --service-account=tiller 
+
 #helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --tiller-tls-verify
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config update
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config version
