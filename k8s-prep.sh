@@ -1,6 +1,10 @@
+#gcloud compute networks create planty-prototyping-cd
+#gcloud container clusters create planty-prototyping-cd --network planty-prototyping-cd --machine-type n1-standard-2 --num-nodes 2 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+
 sudo snap install microk8s --classic
 sudo snap alias microk8s.kubectl kubectl
 microk8s.enable dns 
+
 #kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin
 kubectl create serviceaccount tiller --namespace kube-system
