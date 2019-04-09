@@ -16,7 +16,7 @@ spec:
             limits:
               # Change by Hadi, to workaround low memory
               #memory: "4Gi"
-              memory: "1Gi"
+              memory: "768Mi"
               cpu: "1000m"
             requests:
               # Change by Hadi, to workaround low memory
@@ -28,6 +28,10 @@ spec:
           volumeMounts:
             - name: nexus-data
               mountPath: /nexus-data
-      volumes:
+          env:
+            - name: INSTALL4J_ADD_VM_PARAMS
+              #value: "-Xms1200m -Xmx1200m -XX:MaxDirectMemorySize=2g -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
+              value: "-Xms384m -Xmx384m -XX:MaxDirectMemorySize=256m -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
+    volumes:
         - name: nexus-data
           emptyDir: {}
