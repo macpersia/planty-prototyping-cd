@@ -1,6 +1,18 @@
+# Provision a Kubernetes cluster using GKE. This step can take up to several minutes to complete.
+# The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
+#gcloud container clusters create planty-prototyping-cd-cluster --machine-type n1-standard-2 --num-nodes 1 --scopes "https://www.googleapis.com/auth/projecthosting,cloud-platform"
+
+## Once you're done with CD, you can suspend the cluster by downsizing it to 0 nodes, using: 
+##gcloud container clusters resize planty-prototyping-cd-cluster --size 0
+
+##gcloud components install kubectl
+#sudo apt get install kubectl
 sudo snap install microk8s --classic
 sudo snap alias microk8s.kubectl kubectl
 microk8s.enable dns 
+
+kubectl cluster-info
+
 #kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin
 kubectl create serviceaccount tiller --namespace kube-system
