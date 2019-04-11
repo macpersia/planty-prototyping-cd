@@ -23,8 +23,12 @@ kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-adm
 
 microk8s.enable storage
 sudo snap install helm --classic
+
+#helm init --service-account=tiller 
+##helm init --tiller-tls-verify
+#helm update
+#helm version
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --service-account=tiller 
-#helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --tiller-tls-verify
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config update
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config version
 
