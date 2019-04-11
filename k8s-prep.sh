@@ -1,6 +1,6 @@
 # Provision a Kubernetes cluster using GKE. This step can take up to several minutes to complete.
 # The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
-#gcloud container clusters create planty-prototyping-cd-cluster --machine-type n1-standard-2 --num-nodes 1 --scopes "https://www.googleapis.com/auth/projecthosting,cloud-platform"
+#gcloud container clusters create planty-prototyping-cd-cluster  --network planty-prototyping-cd --machine-type n1-standard-2 --num-nodes 2 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
 
 ## On another machine, you can also fetch the config of a previously created cluster, using:
 ##gcloud container clusters get-credentials planty-prototyping-cd-cluster
@@ -10,6 +10,7 @@
 
 ##gcloud components install kubectl
 #sudo apt get install kubectl
+
 sudo snap install microk8s --classic
 sudo snap alias microk8s.kubectl kubectl
 microk8s.enable dns 
@@ -22,9 +23,11 @@ kubectl create serviceaccount tiller --namespace kube-system
 kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
 microk8s.enable storage
+
+##wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
 sudo snap install helm --classic
 
-#helm init --service-account=tiller 
+#helm init --service-account=tiller
 ##helm init --tiller-tls-verify
 #helm update
 #helm version
