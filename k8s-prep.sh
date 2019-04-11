@@ -1,6 +1,15 @@
+
+#gcloud compute networks create planty-prototyping-cd-network
+# Instances on this network will not be reachable until firewall rules
+# are created. As an example, you can allow all internal traffic between
+# instances as well as SSH, RDP, and ICMP by running:
+##gcloud compute firewall-rules create <FIREWALL_NAME> --network planty-prototyping-cd-network --allow tcp,udp,icmp --source-ranges <IP_RANGE>
+#gcloud compute firewall-rules create planty-prototyping-cd-fw-rules --network planty-prototyping-cd-network --allow tcp,udp,icmp --source-service-accounts=macpersia.it@gmail.com
+#gcloud compute firewall-rules update planty-prototyping-cd-fw-rules --allow tcp:22,tcp:3389,icmp
+
 # Provision a Kubernetes cluster using GKE. This step can take up to several minutes to complete.
 # The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
-#gcloud container clusters create planty-prototyping-cd-cluster  --network planty-prototyping-cd --machine-type n1-standard-2 --num-nodes 2 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+#gcloud container clusters create planty-prototyping-cd-cluster  --network planty-prototyping-cd-network --machine-type n1-standard-2 --num-nodes 2 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
 
 ## On another machine, you can also fetch the config of a previously created cluster, using:
 ##gcloud container clusters get-credentials planty-prototyping-cd-cluster
