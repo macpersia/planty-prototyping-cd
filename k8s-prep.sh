@@ -2,8 +2,11 @@
 # The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
 #gcloud container clusters create planty-prototyping-cd-cluster --machine-type n1-standard-2 --num-nodes 1 --scopes "https://www.googleapis.com/auth/projecthosting,cloud-platform"
 
+## On another machine, you can also fetch the config of a previously created cluster, using:
+##gcloud container clusters get-credentials planty-prototyping-cd-cluster
+
 ## Once you're done with CD, you can suspend the cluster by downsizing it to 0 nodes, using: 
-##gcloud container clusters resize planty-prototyping-cd-cluster --size 0
+##gcloud container clusters resize planty-prototyping-cd-cluster --size 0a
 
 ##gcloud components install kubectl
 #sudo apt get install kubectl
