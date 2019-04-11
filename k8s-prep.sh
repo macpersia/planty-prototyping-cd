@@ -15,7 +15,7 @@
 ##gcloud container clusters get-credentials planty-prototyping-cd-cluster
 
 ## Once you're done with CD, you can suspend the cluster by downsizing it to 0 nodes, using: 
-##gcloud container clusters resize planty-prototyping-cd-cluster --size 0a
+##gcloud container clusters resize planty-prototyping-cd-cluster --size 0
 
 ##gcloud components install kubectl
 #sudo apt get install kubectl
