@@ -1,3 +1,4 @@
+#gcloud projects create planty-prototyping-cd-k8s
 
 #gcloud compute networks create planty-prototyping-cd-network
 # Instances on this network will not be reachable until firewall rules
@@ -9,7 +10,8 @@
 
 # Provision a Kubernetes cluster using GKE. This step can take up to several minutes to complete.
 # The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
-#gcloud container clusters create planty-prototyping-cd-cluster  --network planty-prototyping-cd-network --machine-type n1-standard-2 --num-nodes 2 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+##gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --enable-autoscaling --max-nodes 3 --min-nodes 0 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+#gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --num-nodes 3 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
 
 ## On another machine, you can also fetch the config of a previously created cluster, using:
 ##gcloud container clusters get-credentials planty-prototyping-cd-cluster
@@ -41,6 +43,8 @@ sudo snap install helm --classic
 #helm update
 #helm version
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --service-account=tiller 
+
+#helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --tiller-tls-verify
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config update
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config version
 
@@ -72,7 +76,7 @@ helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n cd st
 export POD_NAME=$(kubectl get pods -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward $POD_NAME 28080:8080 >> /dev/null &
 
-printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode); echo
 
 # MANUAL! Install ThinBackup plugin & restore Jenkins backups
 
