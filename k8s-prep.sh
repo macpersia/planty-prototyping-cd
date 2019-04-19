@@ -10,8 +10,8 @@
 
 # Provision a Kubernetes cluster using GKE. This step can take up to several minutes to complete.
 # The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
-##gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --enable-autoscaling --max-nodes 3 --min-nodes 0 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
-#gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --num-nodes 3 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+##gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --disk-size=30Gi --enable-autoscaling --max-nodes 3 --min-nodes 0 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+#gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --disk-size=50Gi --num-nodes 3 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
 
 ## On another machine, you can also fetch the config of a previously created cluster, using:
 ##gcloud container clusters get-credentials planty-prototyping-cd-cluster
@@ -43,8 +43,6 @@ sudo snap install helm --classic
 #helm update
 #helm version
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --service-account=tiller 
-
-#helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --tiller-tls-verify
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config update
 helm --kubeconfig /snap/microk8s/current/configs/kubelet.config version
 
@@ -56,6 +54,7 @@ sudo iptables -A FORWARD -i cbr0 -j ACCEPT
 # There's an unresolved issue with this charm
 #helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n repo stable/sonatype-nexus --version 1.15.0 --wait
 #kubectl run repo-nexus --image=sonatype/nexus3
+kubectl create -f nexus-data-pvc.yaml 
 kubectl create -f nexus-deployment.yaml 
 kubectl create -f nexus-service.yaml
 
