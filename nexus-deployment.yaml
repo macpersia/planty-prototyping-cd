@@ -9,6 +9,8 @@ spec:
       labels:
         app: nexus-server
     spec:
+      securityContext:
+          fsGroup: 2000
       containers:
         - name: nexus
           image: sonatype/nexus3:latest
@@ -35,4 +37,6 @@ spec:
               #value: "-Xms384m -Xmx384m -XX:MaxDirectMemorySize=256m -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
       volumes:
         - name: nexus-data
-          emptyDir: {}
+          #emptyDir: {}
+          persistentVolumeClaim: 
+            claimName: nexus-data-pvc
