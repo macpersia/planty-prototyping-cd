@@ -1,0 +1,26 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<jenkins.branch.MultiBranchProject_-State plugin="branch-api@2.4.0">
+  <sourceActions>
+    <entry>
+      <string>com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMNavigator::https://bitbucket.org::planty-assistant-devs::planty-assistant-fulfillment</string>
+      <list>
+        <com.cloudbees.jenkins.plugins.bitbucket.BitbucketRepoMetadataAction plugin="cloudbees-bitbucket-branch-source@2.3.0">
+          <scm>git</scm>
+        </com.cloudbees.jenkins.plugins.bitbucket.BitbucketRepoMetadataAction>
+        <com.cloudbees.jenkins.plugins.bitbucket.BitbucketDefaultBranch plugin="cloudbees-bitbucket-branch-source@2.3.0">
+          <repoOwner>planty-assistant-devs</repoOwner>
+          <repository>planty-assistant-fulfillment</repository>
+          <defaultBranch>master</defaultBranch>
+        </com.cloudbees.jenkins.plugins.bitbucket.BitbucketDefaultBranch>
+        <com.cloudbees.jenkins.plugins.bitbucket.BitbucketLink plugin="cloudbees-bitbucket-branch-source@2.3.0">
+          <iconClassName>icon-bitbucket-repo</iconClassName>
+          <url>https://bitbucket.org/planty-assistant-devs/planty-assistant-fulfillment</url>
+        </com.cloudbees.jenkins.plugins.bitbucket.BitbucketLink>
+        <jenkins.scm.api.metadata.ObjectMetadataAction plugin="scm-api@2.4.1">
+          <objectDisplayName>planty-assistant-fulfillment</objectDisplayName>
+          <objectUrl>https://bitbucket.org/planty-assistant-devs/planty-assistant-fulfillment</objectUrl>
+        </jenkins.scm.api.metadata.ObjectMetadataAction>
+      </list>
+    </entry>
+  </sourceActions>
+</jenkins.branch.MultiBranchProject_-State>
