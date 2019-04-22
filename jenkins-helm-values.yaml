@@ -13,18 +13,18 @@ Master:
   #Memory: "4Gi"
   Memory: "2000Mi"
   # Changed by Hadi, to workaround low memory
-  JavaOpts: "-Xms3500m -Xmx3500m"
-  JavaOpts: "-Xms1024m -Xmx1024m"
+  #JavaOpts: "-Xms3500m -Xmx3500m"
+  JavaOpts: "-Xms2048m -Xmx2048m"
   ServiceType: ClusterIP
 Agent:
   Enabled: true
   resources:
     requests:
       cpu: "500m"
-      memory: "256Mi"
+      memory: "2048Mi"
     limits:
       cpu: "1"
-      memory: "512Mi"
+      memory: "2048Mi"
 Persistence:
   # Changed by Hadi
   #Size: 100Gi

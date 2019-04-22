@@ -10,8 +10,8 @@
 
 # Provision a Kubernetes cluster using GKE. This step can take up to several minutes to complete.
 # The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
-##gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --disk-size=30Gi --enable-autoscaling --max-nodes 3 --min-nodes 0 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
-#gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --disk-size=50Gi --num-nodes 3 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+##gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --disk-size=32Gi --enable-autoscaling --max-nodes 2 --min-nodes 0 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
+#gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --disk-size=32Gi --num-nodes 2 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
 
 ## On another machine, you can also fetch the config of a previously created cluster, using:
 ##gcloud container clusters get-credentials planty-prototyping-cd-cluster

@@ -17,14 +17,14 @@ spec:
           resources:
             limits:
               # Change by Hadi, to workaround low memory
-              memory: "4Gi"
+              memory: "3500Mi"
               #memory: "768Mi"
-              cpu: "1000m"
+              cpu: "900m"
             requests:
               # Change by Hadi, to workaround low memory
               memory: "2Gi"
               #memory: "512Mi"
-              cpu: "500m"
+              cpu: "200m"
           ports:
             - containerPort: 8081
           volumeMounts:
@@ -33,7 +33,7 @@ spec:
           env:
             - name: INSTALL4J_ADD_VM_PARAMS
               # Change by Hadi, to workaround low memory
-              value: "-Xms1200m -Xmx1200m -XX:MaxDirectMemorySize=2g -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
+              value: "-Xms2000m -Xmx2000m -XX:MaxDirectMemorySize=1g -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
               #value: "-Xms384m -Xmx384m -XX:MaxDirectMemorySize=256m -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
       volumes:
         - name: nexus-data
