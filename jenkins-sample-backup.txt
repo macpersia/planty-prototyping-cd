@@ -1,4 +1,0 @@
-
-kubectl cp cd-jenkins-848d877849-jfqdb:var/lib/jenkins/backups/FULL-2018-12-30_14-42 ./jenkins/backups/FULL-2018-12-30_14-42
-
-

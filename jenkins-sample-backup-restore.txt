@@ -1,0 +1,8 @@
+
+# Backup
+kubectl cp cd-jenkins-848d877849-jfqdb:var/lib/jenkins/backups/FULL-2019-04-21_01-36 ./jenkins/backups/FULL-2019-04-21_01-36
+
+# Restore
+kubectl exec -it cd-jenkins-66545467d9-cjqcg -- mkdir -p /var/lib/jenkins/backups
+kubectl cp ./jenkins/backups/FULL-2019-04-21_01-36 cd-jenkins-66545467d9-cjqcg:var/lib/jenkins/backups/FULL-2019-04-21_01-36
+

@@ -55,6 +55,7 @@ sudo iptables -A FORWARD -i cbr0 -j ACCEPT
 #helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n repo stable/sonatype-nexus --version 1.15.0 --wait
 #kubectl run repo-nexus --image=sonatype/nexus3
 kubectl create -f nexus-data-pvc.yaml 
+kubectl create pc high-priority --value=1000 --global-default=false --description="A high priority class for Nexus service pods."
 kubectl create -f nexus-deployment.yaml 
 kubectl create -f nexus-service.yaml
 
