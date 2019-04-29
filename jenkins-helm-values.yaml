@@ -1,5 +1,5 @@
-Master:
-  InstallPlugins:
+master:
+  installPlugins:
     - jdk-tool:1.2
     - github-branch-source:2.4.1
     - blueocean-pipeline-api-impl:1.14.0
@@ -108,28 +108,30 @@ Master:
     - branch-api:2.4.0
     - workflow-api:2.33
     - pubsub-light:1.12
-  # Changed by Hadi, to workaround low memory
-  #Cpu: "1"
-  Cpu: "750m"
-  #Memory: "4Gi"
-  Memory: "2400Mi"
-  JavaOpts: "-Xms2300m -Xmx2300m"
-  ServiceType: ClusterIP
-Agent:
-  Enabled: true
   resources:
     requests:
-      cpu: "100m"
-      memory: "1536Mi"
+      cpu: "50m"
+      memory: "256Mi"
     limits:
+      #cpu: "2000m"
+      #memory: "4096Mi"
       cpu: "750m"
       memory: "2400Mi"
-Persistence:
-  # Changed by Hadi
-  #Size: 100Gi
-        Size: 30Gi
-NetworkPolicy:
-  ApiVersion: networking.k8s.io/v1
+  #javaOpts: "-Xms2300m -Xmx2300m"
+  serviceType: ClusterIP
+agent:
+  enabled: true
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+persistence:
+  size: 8Gi
+networkPolicy:
+  apiVersion: networking.k8s.io/v1
 rbac:
   install: true
   serviceAccountName: cd-jenkins
