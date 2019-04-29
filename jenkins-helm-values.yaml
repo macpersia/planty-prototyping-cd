@@ -110,26 +110,24 @@ Master:
     - pubsub-light:1.12
   # Changed by Hadi, to workaround low memory
   #Cpu: "1"
-  Cpu: "100m"
+  Cpu: "750m"
   #Memory: "4Gi"
-  Memory: "1200Mi"
-  # Changed by Hadi, to workaround low memory
-  #JavaOpts: "-Xms3500m -Xmx3500m"
-  JavaOpts: "-Xms1024m -Xmx1024m"
+  Memory: "2400Mi"
+  JavaOpts: "-Xms2300m -Xmx2300m"
   ServiceType: ClusterIP
 Agent:
   Enabled: true
   resources:
     requests:
       cpu: "100m"
-      memory: "1024Mi"
+      memory: "1536Mi"
     limits:
-      cpu: "500m"
-      memory: "1024Mi"
+      cpu: "750m"
+      memory: "2400Mi"
 Persistence:
   # Changed by Hadi
   #Size: 100Gi
-  Size: 30Gi
+        Size: 30Gi
 NetworkPolicy:
   ApiVersion: networking.k8s.io/v1
 rbac:
