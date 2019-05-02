@@ -26,6 +26,7 @@ spec:
               cpu: "250m"
           ports:
             - containerPort: 8081
+            - containerPort: 5000
           volumeMounts:
             - name: nexus-data
               mountPath: /nexus-data
