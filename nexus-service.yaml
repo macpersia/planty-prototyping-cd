@@ -11,6 +11,18 @@ spec:
     app: nexus-server
   type: NodePort  
   ports:
-    - port: 8081
-      targetPort: 8081
+    - name: default-port
       nodePort: 32000
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    - name: docker-local-port
+      nodePort: 30752
+      port: 18081
+      protocol: TCP
+      targetPort: 18081
+    - name: docker-virtual-port
+      nodePort: 32085
+      port: 18085
+      protocol: TCP
+      targetPort: 18085
