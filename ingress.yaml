@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: repo-nexus-service
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    #certmanager.k8s.io/issuer: "letsencrypt-staging"
+    #certmanager.k8s.io/acme-challenge-type: http01
+
+spec:
+  tls:
+  - hosts:
+    - cd-planty-ideas.net
+    secretName: cd-planty-ideas-tls
+  rules:
+  - host: cd.planty-ideas.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: repo-nexus-service
+          servicePort: 8081
