@@ -88,3 +88,6 @@ printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-passwor
 
 
 
+# Preparing Ingress
+helm install -n lb stable/nginx-ingress --version 0.24.1 --wait
+
