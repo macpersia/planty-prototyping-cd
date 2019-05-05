@@ -1,22 +1,44 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: repo-nexus-service
+  name: planty-cd
   annotations:
     kubernetes.io/ingress.class: "nginx"    
     #certmanager.k8s.io/issuer: "letsencrypt-staging"
     #certmanager.k8s.io/acme-challenge-type: http01
-
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
   - hosts:
-    - cd-planty-ideas.net
+    #- cd.planty-ideas.net
+    - planty-cd.ddns.net
     secretName: cd-planty-ideas-tls
   rules:
-  - host: cd.planty-ideas.net
+  #- host: repo.planty-ideas.net
+  - host: planty-cd.ddns.net
     http:
       paths:
-      - path: /
+      #- path: /
+      - path: /nexus
         backend:
           serviceName: repo-nexus-service
           servicePort: 8081
+  #- host: docker.planty-ideas.net
+  - host: planty-cd.ddns.net
+    http:
+      paths:
+      #- path: /
+      - path: /docker
+        backend:
+          serviceName: repo-nexus-service
+          servicePort: 5000
+  #- host: cd.planty-ideas.net
+  - host: planty-cd.ddns.net
+    http:
+      paths:
+      #- path: /
+      - path: /jenkins
+        backend:
+          serviceName: cd-jenkins
+          servicePort: 8080
+  
