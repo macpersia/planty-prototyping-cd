@@ -10,34 +10,34 @@ metadata:
 spec:
   tls:
   - hosts:
-    #- cd.planty-ideas.net
-    - planty-cd.ddns.net
+    #- planty-cd.ddns.net
+    - cd.planty-ideas.net
     secretName: cd-planty-ideas-tls
   rules:
-  #- host: repo.planty-ideas.net
-  - host: planty-cd.ddns.net
+  #- host: planty-cd.ddns.net
+  - host: nexus.cd.planty-ideas.net
     http:
       paths:
-      #- path: /
-      - path: /nexus
+      #- path: /nexus
+      - path: /
         backend:
           serviceName: repo-nexus-service
           servicePort: 8081
-  #- host: docker.planty-ideas.net
-  - host: planty-cd.ddns.net
+  #- host: planty-cd.ddns.net
+  - host: docker.cd.planty-ideas.net
     http:
       paths:
-      #- path: /
-      - path: /docker
+      #- path: /docker
+      - path: /
         backend:
           serviceName: repo-nexus-service
           servicePort: 5000
-  #- host: cd.planty-ideas.net
-  - host: planty-cd.ddns.net
+  #- host: planty-cd.ddns.net
+  - host: jenkins.cd.planty-ideas.net
     http:
       paths:
-      #- path: /
-      - path: /jenkins
+      #- path: /jenkins
+      - path: /
         backend:
           serviceName: cd-jenkins
           servicePort: 8080
