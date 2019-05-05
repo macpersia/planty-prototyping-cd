@@ -4,14 +4,19 @@ metadata:
   name: planty-cd
   annotations:
     kubernetes.io/ingress.class: "nginx"    
-    #certmanager.k8s.io/issuer: "letsencrypt-staging"
-    #certmanager.k8s.io/acme-challenge-type: http01
     nginx.ingress.kubernetes.io/rewrite-target: /
+    ## Uncomment the following lines only when cert-manager is properly installed and configured!
+    #certmanager.k8s.io/issuer: "letsencrypt-staging"
+    certmanager.k8s.io/issuer: "letsencrypt-prod"
+    certmanager.k8s.io/acme-challenge-type: http01
 spec:
   tls:
   - hosts:
     #- planty-cd.ddns.net
     - cd.planty-ideas.net
+    - nexus.cd.planty-ideas.net
+    - docker.cd.planty-ideas.net
+    - jenkins.cd.planty-ideas.net
     secretName: cd-planty-ideas-tls
   rules:
   #- host: planty-cd.ddns.net
