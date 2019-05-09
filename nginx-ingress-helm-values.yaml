@@ -1,0 +1,12 @@
+## Ref: https://github.com/helm/charts/blob/master/stable/nginx-ingress/values.yaml
+##
+controller:
+  service:
+    #type: LoadBalancer
+    type: NodePort
+    # nodePorts:
+    #   http: 32080
+    #   https: 32443
+    nodePorts:
+      http: ""
+      https: ""
