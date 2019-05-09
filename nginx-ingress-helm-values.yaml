@@ -10,15 +10,15 @@ controller:
     #nodePorts:
     #  http: ""
     #  https: ""
+    
+#  #minAvailable: 1
+#  minAvailable: 0
   
-  #minAvailable: 1
-  minAvailable: 0
-
-  autoscaling:
-    enabled: false
-    #minReplicas: 1
-    minReplicas: 0
-
-defaultBackend:
-  #minAvailable: 1
-  minAvailable: 0
+#  autoscaling:
+#    enabled: false
+#    #minReplicas: 1
+#    minReplicas: 0
+    
+#defaultBackend:
+#  #minAvailable: 1
+#  minAvailable: 0
