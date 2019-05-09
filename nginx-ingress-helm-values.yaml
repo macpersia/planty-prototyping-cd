@@ -4,9 +4,21 @@ controller:
   service:
     #type: LoadBalancer
     type: NodePort
-    # nodePorts:
-    #   http: 32080
-    #   https: 32443
     nodePorts:
-      http: ""
-      https: ""
+      http: 32080
+      https: 32443
+    #nodePorts:
+    #  http: ""
+    #  https: ""
+  
+  #minAvailable: 1
+  minAvailable: 0
+
+  autoscaling:
+    enabled: false
+    #minReplicas: 1
+    minReplicas: 0
+
+defaultBackend:
+  #minAvailable: 1
+  minAvailable: 0
