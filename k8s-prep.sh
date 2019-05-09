@@ -6,7 +6,7 @@
 # instances as well as SSH, RDP, and ICMP by running:
 ##gcloud compute firewall-rules create <FIREWALL_NAME> --network planty-prototyping-cd-network --allow tcp,udp,icmp --source-ranges <IP_RANGE>
 #gcloud compute firewall-rules create planty-prototyping-cd-fw-rules --network planty-prototyping-cd-network --allow tcp,udp,icmp --source-service-accounts=macpersia.it@gmail.com
-#gcloud compute firewall-rules update planty-prototyping-cd-fw-rules --allow tcp:22,tcp:3389,icmp
+#gcloud compute firewall-rules update planty-prototyping-cd-fw-rules --allow tcp:22,tcp:3389,icmp,tcp:80,tcp:443
 
 # Provision a Kubernetes cluster using GKE. This step can take up to several minutes to complete.
 # The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
