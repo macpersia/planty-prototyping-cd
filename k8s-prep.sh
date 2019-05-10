@@ -8,6 +8,8 @@
 #gcloud compute firewall-rules create planty-prototyping-cd-fw-rules --network planty-prototyping-cd-network --allow tcp,udp,icmp --source-service-accounts=macpersia.it@gmail.com
 #gcloud compute firewall-rules update planty-prototyping-cd-fw-rules --allow tcp:22,tcp:3389,icmp,tcp:80,tcp:443,tcp:32080,tcp:32443
 
+#gcloud compute firewall-rules create planty-prototyping-cd-fw-rules-pub --network planty-prototyping-cd-network --allow tcp:80,tcp:443,tcp:32080,tcp:32443
+
 # Provision a Kubernetes cluster using GKE. This step can take up to several minutes to complete.
 # The extra scopes enable Jenkins to access Cloud Source Repositories and Container Registry.
 ###gcloud container clusters create planty-prototyping-cd-cluster --network planty-prototyping-cd-network --machine-type n1-standard-1 --disk-size=32Gi --enable-autoscaling --max-nodes 2 --min-nodes 0 --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw,cloud-platform"
