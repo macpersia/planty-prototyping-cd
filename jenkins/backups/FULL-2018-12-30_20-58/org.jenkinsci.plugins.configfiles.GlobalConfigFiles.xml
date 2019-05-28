@@ -1,0 +1,93 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<org.jenkinsci.plugins.configfiles.GlobalConfigFiles plugin="config-file-provider@3.4.1">
+  <configs class="sorted-set">
+    <comparator class="org.jenkinsci.plugins.configfiles.GlobalConfigFiles$1"/>
+    <org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig>
+      <id>my-maven-settings</id>
+      <name>MySettings</name>
+      <comment>user settings</comment>
+      <content>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;
+	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;&gt;
+
+	&lt;mirrors&gt;
+		&lt;mirror&gt;
+			&lt;id&gt;local-repo&lt;/id&gt;
+	                &lt;url&gt;http://repo-nexus-service:8081/repository/maven-public/&lt;/url&gt;
+			&lt;mirrorOf&gt;*&lt;/mirrorOf&gt;
+		&lt;/mirror&gt;
+	&lt;/mirrors&gt;
+	&lt;profiles&gt;
+		&lt;profile&gt;
+			&lt;id&gt;my-profile&lt;/id&gt;
+			&lt;!-- &lt;activation&gt; &lt;activeByDefault&gt;true&lt;/activeByDefault&gt; &lt;/activation&gt; --&gt;
+			&lt;repositories&gt;
+				&lt;repository&gt;
+					&lt;id&gt;repo2.maven.org&lt;/id&gt;
+					&lt;url&gt;http://repo2.maven.org/maven2&lt;/url&gt;
+				&lt;/repository&gt;
+				&lt;repository&gt;
+					&lt;id&gt;java-net-releases&lt;/id&gt;
+					&lt;url&gt;https://maven.java.net/content/repositories/releases&lt;/url&gt;
+				&lt;/repository&gt;
+				&lt;repository&gt;
+					&lt;id&gt;fusesource&lt;/id&gt;
+					&lt;url&gt;http://repo.fusesource.com/maven2&lt;/url&gt;
+					&lt;snapshots&gt;
+						&lt;enabled&gt;false&lt;/enabled&gt;
+					&lt;/snapshots&gt;
+					&lt;releases&gt;
+						&lt;enabled&gt;true&lt;/enabled&gt;
+					&lt;/releases&gt;
+				&lt;/repository&gt;
+			&lt;/repositories&gt;
+			&lt;pluginRepositories&gt;
+				&lt;pluginRepository&gt;
+					&lt;id&gt;maven.java.net&lt;/id&gt;
+					&lt;name&gt;Java.net Maven2 Repository&lt;/name&gt;
+					&lt;url&gt;http://download.java.net/maven/2&lt;/url&gt;
+				&lt;/pluginRepository&gt;
+			&lt;/pluginRepositories&gt;
+		&lt;/profile&gt;
+
+	        &lt;profile&gt;
+		    &lt;id&gt;local-nexus&lt;/id&gt;
+	            &lt;repositories&gt;
+	                &lt;repository&gt;
+	                    &lt;id&gt;local-snapshots&lt;/id&gt;
+	                    &lt;url&gt;http://repo-nexus-service:8081/repository/maven-snapshots/&lt;/url&gt;
+	                    &lt;releases&gt;&lt;enabled&gt;false&lt;/enabled&gt;&lt;/releases&gt;
+	                    &lt;snapshots&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/snapshots&gt;
+	                &lt;/repository&gt;
+	                &lt;repository&gt;
+	                    &lt;id&gt;local-releases&lt;/id&gt;
+	                    &lt;url&gt;http://repo-nexus-service:8081/repository/maven-releases/&lt;/url&gt;
+	                    &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;
+	                    &lt;snapshots&gt;&lt;enabled&gt;false&lt;/enabled&gt;&lt;/snapshots&gt;
+	                &lt;/repository&gt;
+	            &lt;/repositories&gt;
+	        &lt;/profile&gt;
+	&lt;/profiles&gt;
+	&lt;activeProfiles&gt;
+		&lt;activeProfile&gt;my-profile&lt;/activeProfile&gt;
+		&lt;activeProfile&gt;local-nexus&lt;/activeProfile&gt;
+	&lt;/activeProfiles&gt;
+&lt;/settings&gt;</content>
+      <providerId>org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig</providerId>
+      <serverCredentialMappings/>
+      <isReplaceAll>true</isReplaceAll>
+    </org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig>
+    <jenkins.plugins.nodejs.configfiles.NPMConfig plugin="nodejs@1.2.7">
+      <id>my-npmrc</id>
+      <name>MyNpmrcConfig</name>
+      <comment>user config</comment>
+      <content>registry=http://repo-nexus-service:8081/repository/npm-virtual/
+_auth=&quot;YWRtaW46YWRtaW4xMjM=&quot;
+//repo-nexus-service:8081/repository/npm-local/:_authToken=NpmToken.aa4a1922-696a-338e-ba5f-cb74dbc2145a</content>
+      <providerId>jenkins.plugins.nodejs.configfiles.NPMConfig</providerId>
+      <registries/>
+    </jenkins.plugins.nodejs.configfiles.NPMConfig>
+  </configs>
+</org.jenkinsci.plugins.configfiles.GlobalConfigFiles>

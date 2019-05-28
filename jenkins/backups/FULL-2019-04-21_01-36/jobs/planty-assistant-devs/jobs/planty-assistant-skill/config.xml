@@ -1,0 +1,71 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject plugin="workflow-multibranch@2.21">
+  <actions/>
+  <properties>
+    <jenkins.branch.ProjectNameProperty plugin="branch-api@2.4.0">
+      <name>planty-assistant-skill</name>
+    </jenkins.branch.ProjectNameProperty>
+  </properties>
+  <folderViews class="jenkins.branch.MultiBranchProjectViewHolder" plugin="branch-api@2.4.0">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </folderViews>
+  <healthMetrics>
+    <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder@6.8">
+      <nonRecursive>false</nonRecursive>
+    </com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric>
+  </healthMetrics>
+  <icon class="jenkins.branch.MetadataActionFolderIcon" plugin="branch-api@2.4.0">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </icon>
+  <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@6.8">
+    <pruneDeadBranches>true</pruneDeadBranches>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>-1</numToKeep>
+  </orphanedItemStrategy>
+  <triggers>
+    <com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger plugin="cloudbees-folder@6.8">
+      <spec>H H/4 * * *</spec>
+      <interval>86400000</interval>
+    </com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger>
+  </triggers>
+  <disabled>false</disabled>
+  <sources class="jenkins.branch.MultiBranchProject$BranchSourceList" plugin="branch-api@2.4.0">
+    <data>
+      <jenkins.branch.BranchSource>
+        <source class="com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource" plugin="cloudbees-bitbucket-branch-source@2.4.4">
+          <id>com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMNavigator::https://bitbucket.org::planty-assistant-devs::planty-assistant-skill</id>
+          <serverUrl>https://bitbucket.org</serverUrl>
+          <repoOwner>planty-assistant-devs</repoOwner>
+          <repository>planty-assistant-skill</repository>
+          <traits>
+            <com.cloudbees.jenkins.plugins.bitbucket.BranchDiscoveryTrait>
+              <strategyId>1</strategyId>
+            </com.cloudbees.jenkins.plugins.bitbucket.BranchDiscoveryTrait>
+            <com.cloudbees.jenkins.plugins.bitbucket.OriginPullRequestDiscoveryTrait>
+              <strategyId>1</strategyId>
+            </com.cloudbees.jenkins.plugins.bitbucket.OriginPullRequestDiscoveryTrait>
+            <com.cloudbees.jenkins.plugins.bitbucket.ForkPullRequestDiscoveryTrait>
+              <strategyId>1</strategyId>
+              <trust class="com.cloudbees.jenkins.plugins.bitbucket.ForkPullRequestDiscoveryTrait$TrustTeamForks"/>
+            </com.cloudbees.jenkins.plugins.bitbucket.ForkPullRequestDiscoveryTrait>
+          </traits>
+        </source>
+        <buildStrategies>
+          <jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl plugin="basic-branch-build-strategies@1.1.1">
+            <filters>
+              <jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl_-RegexNameFilter>
+                <regex>.*</regex>
+                <caseSensitive>true</caseSensitive>
+              </jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl_-RegexNameFilter>
+            </filters>
+          </jenkins.branch.buildstrategies.basic.NamedBranchBuildStrategyImpl>
+        </buildStrategies>
+      </jenkins.branch.BranchSource>
+    </data>
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+  </sources>
+  <factory class="org.jenkinsci.plugins.workflow.multibranch.WorkflowBranchProjectFactory">
+    <owner class="org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject" reference="../.."/>
+    <scriptPath>Jenkinsfile</scriptPath>
+  </factory>
+</org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProject>

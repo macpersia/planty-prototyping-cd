@@ -1,0 +1,30 @@
+## Ref: https://github.com/helm/charts/blob/master/stable/nginx-ingress/values.yaml
+##
+controller:
+  service:
+    #type: LoadBalancer
+    type: NodePort
+    nodePorts:
+      http: 32080
+      https: 32443
+    #nodePorts:
+    #  http: ""
+    #  https: ""
+    
+    ## Set external traffic policy to: "Local" to preserve source IP on
+    ## providers supporting it
+    ## Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
+    #externalTrafficPolicy: ""
+    externalTrafficPolicy: "Local"
+
+#  #minAvailable: 1
+#  minAvailable: 0
+  
+#  autoscaling:
+#    enabled: false
+#    #minReplicas: 1
+#    minReplicas: 0
+    
+#defaultBackend:
+#  #minAvailable: 1
+#  minAvailable: 0

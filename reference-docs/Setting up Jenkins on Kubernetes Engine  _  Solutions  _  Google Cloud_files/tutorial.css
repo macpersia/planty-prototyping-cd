@@ -1,0 +1,121 @@
+/* When you stage Cloud content that uses this file, the content will actually
+   use the CSS from d.g.c. due to a redirect. */
+
+
+/* Prevent border from going behind the right side floats */
+.tutorial h2 { line-height: normal; overflow: auto; }
+
+#about {
+  float: right;
+  width: 250px;
+  margin-left: 30px;
+  font-size: inherit;
+}
+
+/* Reset some of the font-sizes back to their default */
+#about p, aside { font-size: 13px; }
+
+#prev {
+  float: left;
+}
+
+#meta, aside.definition, aside.term, aside.tip, aside.sidebar {
+  clear: both;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 0px;
+}
+aside.tip, aside.definition, aside.term, aside.sidebar{
+  padding: 5px 10px 8px 20px;
+  background-position: 2px 5px;
+  background-repeat: no-repeat;
+  width: 208px;
+  float: right;
+  margin-left: 30px;
+}
+
+#meta, aside.definition, aside.term {
+  background-color: #f1f1f1;
+}
+
+aside.definition, aside.term {
+  background-image: url('/assets/img/question-y16.png');
+}
+
+aside.tip {
+  background-color: #f2fcff;
+  background-image: url('/assets/img/lightbulb-y16.png');
+}
+
+aside.tipinline {
+  float: none;
+  width: auto;
+}
+
+#meta h5 {
+  margin: 0;
+  padding-bottom: 0.7em;
+}
+
+#about div.meta-products, #about div.related { margin-bottom: 1em; }
+
+#overview {
+  margin-right: 10px;
+}
+
+/* #lessons ul, #classes ul, #courses ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+} */
+
+
+.inactive, .inactive:hover {
+  text-decoration: none;
+  color: #CCC;
+}
+
+#tutorial-content pre.console {
+  background: #000;
+  color: #fff;
+  font-size: 90%;
+}
+
+#tutorial-content pre.console .highlight {
+  color: #000;
+  background-color: #fff;
+}
+
+
+div.tutorial .expandable {
+  border: 1px dashed #ececec;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.2);
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.2);
+  margin-left: 0px;
+  padding-left: 22px;
+}
+
+div.tutorial .expandable.inline {
+  display: inline;
+  border: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.tutorial .expandable.inline .expand-control {
+  color: green;
+  cursor: hand;
+}
+
+div.tutorial .expandable.inline .expand-control:hover {
+  border-bottom: 1px dotted green;
+}
+
+/* Overrides */
+.note, .caution, .dogfood, .warning, .special {
+  overflow: auto;
+}
