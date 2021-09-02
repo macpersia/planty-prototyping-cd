@@ -31,27 +31,30 @@ microk8s.enable dns
 
 kubectl cluster-info
 
-#kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
-kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin
-kubectl create serviceaccount tiller --namespace kube-system
-kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+##kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value account)
+#kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin
+#kubectl create serviceaccount tiller --namespace kube-system
+#kubectl create clusterrolebinding tiller-admin-binding --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
 microk8s.enable storage
 
-##wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
-sudo snap install helm --classic
+###wget https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz
+#sudo snap install helm --classic
+microk8s.enable helm3
+alias helm3=microk8s.helm3
 
-#helm init --service-account=tiller
-##helm init --tiller-tls-verify
-#helm update
-#helm version
-helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --service-account=tiller 
-helm --kubeconfig /snap/microk8s/current/configs/kubelet.config update
-helm --kubeconfig /snap/microk8s/current/configs/kubelet.config version
+##helm init --service-account=tiller
+###helm init --tiller-tls-verify
+##helm update
+##helm version
+#helm --kubeconfig /snap/microk8s/current/configs/kubelet.config init --service-account=tiller 
+#helm --kubeconfig /snap/microk8s/current/configs/kubelet.config update
+#helm --kubeconfig /snap/microk8s/current/configs/kubelet.config version
+microk8s.helm3 version
 
-# Make the internet accessible to pods 
-sudo iptables -A FORWARD -i enp0s3 -j ACCEPT
-sudo iptables -A FORWARD -i cbr0 -j ACCEPT
+## Make the internet accessible to pods 
+#sudo iptables -A FORWARD -i enp0s3 -j ACCEPT
+#sudo iptables -A FORWARD -i cbr0 -j ACCEPT
 
 # Prepare Nexus
 # There's an unresolved issue with this charm
@@ -75,11 +78,17 @@ kubectl create -f nexus-service.yaml
 # MANUAL! For local development, configure both Maven and NPM to point to the Nexus on k8s
 
 # Prepare Jenkins
-helm --kubeconfig /snap/microk8s/current/configs/kubelet.config install -n cd stable/jenkins --version 0.39.0 -f jenkins-helm-values.yaml --wait
-export POD_NAME=$(kubectl get pods -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
-kubectl port-forward $POD_NAME 28080:8080 >> /dev/null &
+helm3 repo add jenkinsci https://charts.jenkins.io
+helm3 repo update
+kubectl create namespace cd
+kubectl apply -f jenkins-data-pvc.yaml -n cd
+kubectl apply -f jenkins-sa.yaml -n cd
+helm3 install jenkins -n cd jenkinsci/jenkins -f jenkins-helm-values.yaml --wait
 
-printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode); echo
+# export POD_NAME=$(kubectl get pods -n cd -l "app.kubernetes.io/component=jenkins-controller" -o jsonpath="{.items[0].metadata.name}")
+# kubectl port-forward -n cd $POD_NAME 28080:8080 >> /dev/null &
+
+printf $(kubectl get secret -n cd jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode); echo
 
 # MANUAL! Install ThinBackup plugin & restore Jenkins backups
 
@@ -89,8 +98,7 @@ printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-passwor
 #sudo npm install bespoken-tools -g
 
 
-
-# Preparing Ingress
-helm install -n lb stable/nginx-ingress --version 0.24.1 -f nginx-ingress-helm-values.yaml --wait
-kubectl create -f ingress.yaml
-
+# # Preparing Ingress
+# helm3 install -n lb stable/nginx-ingress --version 0.24.1 -f nginx-ingress-helm-values.yaml --wait
+# kubectl create -f ingress.yaml
+microk8s.enable ingress

@@ -1,0 +1,8 @@
+
+# Backup
+kubectl cp -n cd jenkins-0:var/jenkins_home/backups/FULL-2019-04-21_01-36 ./jenkins/backups/FULL-2019-04-21_01-36
+
+# Restore
+kubectl exec -n cd -it jenkins-0 -- mkdir -p /var/jenkins_home/backups
+kubectl cp -n cd ./jenkins/backups/FULL-2019-04-21_01-36 jenkins-0:var/jenkins_home/backups/FULL-2019-04-21_01-36
+

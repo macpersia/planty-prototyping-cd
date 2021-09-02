@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: repo-nexus
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nexus-server
+    spec:
+      securityContext:
+          fsGroup: 2000
+      containers:
+        - name: nexus
+          image: sonatype/nexus3:latest
+          resources:
+            limits:
+              # Change by Hadi, to workaround low memory/cpu
+              #memory: "3500Mi"
+              #cpu: "1"
+              memory: "2400Mi"
+              cpu: "750m"
+            requests:
+              memory: "2000Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 8081
+            - containerPort: 5000
+            - containerPort: 5001
+          volumeMounts:
+            - name: nexus-data
+              mountPath: /nexus-data
+          env:
+            - name: INSTALL4J_ADD_VM_PARAMS
+              # Change by Hadi, to workaround low memory
+              #value: "-Xms1200m -Xmx1200m -XX:MaxDirectMemorySize=2g -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
+              value: "-Xms800m -Xmx800m -XX:MaxDirectMemorySize=1600m -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
+      volumes:
+        - name: nexus-data
+          #emptyDir: {}
+          persistentVolumeClaim: 
+            claimName: nexus-data-pvc
+      priorityClassName: high-priority
+

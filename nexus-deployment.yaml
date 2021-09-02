@@ -1,45 +1,63 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
+  creationTimestamp: null
+  labels:
+    app: nexus-server
   name: repo-nexus
 spec:
+  progressDeadlineSeconds: 2147483647
   replicas: 1
+  revisionHistoryLimit: 2147483647
+  selector:
+    matchLabels:
+      app: nexus-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app: nexus-server
     spec:
-      securityContext:
-          fsGroup: 2000
       containers:
-        - name: nexus
-          image: sonatype/nexus3:latest
-          resources:
-            limits:
-              # Change by Hadi, to workaround low memory/cpu
-              #memory: "3500Mi"
-              #cpu: "1"
-              memory: "2400Mi"
-              cpu: "750m"
-            requests:
-              memory: "2000Mi"
-              cpu: "250m"
-          ports:
-            - containerPort: 8081
-            - containerPort: 5000
-            - containerPort: 5001
-          volumeMounts:
-            - name: nexus-data
-              mountPath: /nexus-data
-          env:
-            - name: INSTALL4J_ADD_VM_PARAMS
-              # Change by Hadi, to workaround low memory
-              #value: "-Xms1200m -Xmx1200m -XX:MaxDirectMemorySize=2g -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
-              value: "-Xms800m -Xmx800m -XX:MaxDirectMemorySize=1600m -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs"
-      volumes:
-        - name: nexus-data
-          #emptyDir: {}
-          persistentVolumeClaim: 
-            claimName: nexus-data-pvc
+      - env:
+        - name: INSTALL4J_ADD_VM_PARAMS
+          value: -Xms800m -Xmx800m -XX:MaxDirectMemorySize=1600m -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs
+        image: sonatype/nexus3:latest
+        imagePullPolicy: Always
+        name: nexus
+        ports:
+        - containerPort: 8081
+          protocol: TCP
+        - containerPort: 5000
+          protocol: TCP
+        - containerPort: 5001
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 750m
+            memory: 2400Mi
+          requests:
+            cpu: 250m
+            memory: 2000Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /nexus-data
+          name: nexus-data
+      dnsPolicy: ClusterFirst
       priorityClassName: high-priority
-
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 2000
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: nexus-data
+        persistentVolumeClaim:
+          claimName: nexus-data-pvc
+status: {}
